@@ -1,8 +1,9 @@
-# Trendyol-Bootcamp-You-Do-1
-Trendyol Data Science BootCamp You Do 1
+# Trendyol-Bootcamp
 
-Trendyol Data Science BootCamp You Do 2 
+## Trendyol Data Science BootCamp You Do 1
 
-Trendyol Data Science BootCamp Capstone Project 
+## Trendyol Data Science BootCamp You Do 2 
 
-Mehmet Selim Çetin, You Do Exercise Solutions.
+## Trendyol Data Science BootCamp Capstone Project 
+
+Mehmet Selim Çetin, Trendyol Data Science Bootcamp Exercise Solutions.
