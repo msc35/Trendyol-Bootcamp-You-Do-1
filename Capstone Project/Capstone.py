@@ -184,7 +184,7 @@ with trange(1000) as epochs:
                 w[0] * (np.log(index_df_art["price"].iloc[j])) +     
                 w[1] *(np.exp(-np.log(index_df_time["time_passed"].iloc[i]))) +    
                 w[2] *((index_df["age"].iloc[i] - index_df["age"].min()) / (index_df["age"].max() - index_df["age"].min()))+
-                w[3] * (index_df_art["fashion_news_freq"].iloc[i])          
+                w[3] * (index_df["fashion_news_freq"].iloc[i])          
             )
             R_Pred_c[i][j] = 1/(1+np.exp(-P))
             total_e += e ** 2
