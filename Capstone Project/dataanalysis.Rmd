@@ -1,0 +1,73 @@
+---
+title: "Untitled"
+author: "msc"
+date: "13 04 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(magrittr)
+library(ggplot2)
+library(GGally)
+library(tidyverse)
+library(car)
+library(pander)
+library(MASS)
+library(dplyr)
+library(readxl)
+```
+
+
+```{r}
+d <- read_excel("Data_Analysis.xlsx")
+
+d <- d %>% 
+  mutate_if(is.character,factor)
+d <- d %>% mutate(Rate = factor(Rate))
+```
+
+
+```{r, fig.width=14}
+smtr <- function(data, mapping, method="loess", ...){
+      p <- ggplot(data = data, mapping = mapping) +
+      geom_point() +
+      geom_smooth(method=method, ...)
+      p
+    }
+
+
+ggpairs(d[,c(35,37,33,34,5,16,31,32)], lower = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"), upper = list(continuous = smtr, combo = "facethist", discrete = "facetbar", na = "na"))
+```
+
+* Age and Fashion_news_frequency has an interaction.
+
+* club_member_status and time passed has an interaction, also they may create multicollinearity.
+
+* price is right skewed, might need log transformation.
+
+* Age is combination of two distributions.
+
+* Rate and time_passed has a relation.
+
+```{r}
+ggplot(aes(as.numeric(Rate)), data = d)  + geom_bar()
+
+ggplot(aes(time_passed,as.numeric(Rate)), data = d)  + geom_point() + geom_smooth()
+
+
+``` 
+
+
+
+
+
+
+
+
+
+
