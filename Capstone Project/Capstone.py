@@ -212,6 +212,42 @@ for i in range(R.shape[0]):
         R_Pred_Final[i][j] = 1/(1+np.exp(-P))
 
 
+################## Determine a Treshold #######################################
+irow, jcol = np.where(~np.isnan(R)) # Nan Olmayanlar
+
+
+treshold = .19
+R_Pred_tresh = R_Pred.copy()
+for i, j in zip(irow, jcol):
+    if R_Pred_c[i][j] >= treshold:
+        R_Pred_tresh[i][j]=1
+    else:
+        R_Pred_tresh[i][j]=0
+
+np.nanmax(R_Pred_tresh)
+np.nansum(R_Pred_tresh)
+
+
+tt = 0
+tf = 0
+ft = 0
+ff = 0
+for i, j in zip(irow, jcol):
+    if R_Pred_tresh[i][j] == 1 and R[i][j] == 1:
+        tt += 1
+    elif R_Pred_tresh[i][j] == 1 and R[i][j] == 0:
+        tf +=1
+    elif R_Pred_tresh[i][j] == 0 and R[i][j] == 1:
+        ft +=1
+    elif R_Pred_tresh[i][j] == 0 and R[i][j] == 0:
+        ff +=1
+    else:
+        print("error")
+
+
+xtabs = pd.DataFrame({"Real/Pred": ["t","f"],"t": [tt,tf], "f": [ft,ff]})
+print("True perc: ", (tt+ff)/(tt+tf+ft+ff))
+
 
 
 
